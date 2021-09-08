@@ -1,0 +1,87 @@
+@mixin text-outline($width: 2px) {
+	text-shadow: -$width $width 0 black,
+	$width $width 0 black,
+	$width -$width 0 black,
+	-$width -$width 0 black;
+}
+
+body {
+	background-color: black;
+	max-width: 100vw;
+	height: 100vh;
+	overflow-x: hidden;
+	margin: 0;
+
+	font-family: "Bebas Neue", sans-serif;
+	text-align: center;
+}
+
+h1 {
+	color: white;
+	font-size: 5em;
+	margin: 1ch;
+}
+
+div.projects_overview {
+	display: flex;
+	flex-direction: column;
+
+	div.project {
+		display: flex;
+
+		&:nth-child(even) {
+			flex-direction: row-reverse;
+		}
+		&:nth-child(odd) {
+			flex-direction: row;
+		}
+
+		div.project_desc {
+			box-sizing: border-box;
+			font-size: 1.5em;
+			width: 50%;
+			padding: 3ch;
+			background-color: #00ffcc;
+			//flex-grow: 1;
+
+			&#project_bookworm {
+				background-color: darkgreen;
+				color: white;
+				h2 {
+                    letter-spacing: 0.02em;
+				}
+			}
+
+			&#sp-members {
+				background-color: #ba413d;
+				color: white;
+				h2 {
+                    letter-spacing: 0.02em;
+				}
+			}
+
+			h2 {
+				font-size: 3em;
+				margin: 0.8ch 0 0;
+			}
+		}
+
+		div.project_image {
+			flex-grow: 1;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: cover;
+            filter: blur(5px);
+
+			&#psychedel {
+				background-image: url("/static?t=img&q=circuit1.jpg");
+			}
+			&#project_bookworm {
+				background-image: url("/static?t=img&q=books1.jpg");
+			}
+			&#sp-members {
+				background-image: url("/static?t=img&q=stagelight1.jpg");
+			}
+		}
+	}
+}

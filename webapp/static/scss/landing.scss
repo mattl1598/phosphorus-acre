@@ -1,0 +1,59 @@
+@mixin text-outline($width: 2px) {
+	text-shadow: -$width $width 0 black,
+		$width $width 0 black,
+		$width -$width 0 black,
+		-$width -$width 0 black;
+}
+
+body {
+  background-image: url("/static?t=img&q=circuit1.jpg");
+  backdrop-filter: blur(5px);
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+div.landing_content {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  h1.name {
+    text-align: center;
+    font-family: "Bebas Neue", sans-serif;
+    color: white;
+    font-weight: bold;
+    font-size: 7em;
+    letter-spacing: 0.07em;
+    margin: 0;
+    @include text-outline(2px);
+  }
+
+  ul.links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(3*13ch);
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: bold;
+    font-size: 2em;
+
+    li {
+      padding: 1ch;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+      }
+    }
+  }
+}
