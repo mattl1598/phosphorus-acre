@@ -1,59 +1,163 @@
-@mixin text-outline($width: 2px) {
-	text-shadow: -$width $width 0 black,
-		$width $width 0 black,
-		$width -$width 0 black,
-		-$width -$width 0 black;
+@mixin text-outline($width: 2px, $colour: black) {
+	text-shadow: -$width $width 0 $colour,
+		$width $width 0 $colour,
+		$width -$width 0 $colour,
+		-$width -$width 0 $colour;
 }
 
 body {
-  background-image: url("/static?t=img&q=circuit1.jpg");
-  backdrop-filter: blur(5px);
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0;
+	background: black;
+	//background-image: url("/static?t=img&q=circuit1.jpg");
+	//backdrop-filter: blur(5px);
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	margin: 0;
+
+	//display: grid;
+	//align-content: center;
+	//justify-content: center;
+	////grid-template-rows: auto 1fr 1fr;
+	//grid-template-rows: 100vh;
+	//grid-template-columns: 100vw;
 }
 
 div.landing_content {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+	position: absolute;
+	top: 0;
+	//left: 0;
 
-  h1.name {
-    text-align: center;
-    font-family: "Bebas Neue", sans-serif;
-    color: white;
-    font-weight: bold;
-    font-size: 7em;
-    letter-spacing: 0.07em;
-    margin: 0;
-    @include text-outline(2px);
+	z-index: 10;
+
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	gap: 1ch;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	h1.name {
+		text-align: center;
+		font-family: "Bebas Neue", sans-serif;
+		color: white;
+		font-weight: bold;
+		font-size: 7em;
+		letter-spacing: 0.07em;
+		margin: 0;
+		@include text-outline(2px);
+
+		backdrop-filter: blur(5px);
+		padding: 0.5ch 1ch;
+		border-radius: 1ch;
+	}
+
+    ul.links {
+	    backdrop-filter: blur(5px);
+		//padding: 0.5ch 1ch;
+		border-radius: 1ch;
+
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		width: calc(3*13ch);
+
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+
+		font-family: "Bebas Neue", sans-serif;
+	    font-weight: bold;
+		font-size: 2em;
+
+		li {
+			padding: 1ch;
+			@include text-outline(1px, white);
+			border-radius: 1ch;
+
+			&:hover {
+				background-color: rgba(255, 255, 255, 0.4);
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+@media (orientation: portrait) {
+	body {
+		font-size: 2em;
+	}
+
+	div.svg {
+		//position: absolute;
+		//top: 0;
+		//left: 0;
+		height: 100vh;
+		width: 100vw;
+		transform-origin: center;
+		transform: rotate(270deg) translateX(-50%);
+	}
+
+	svg {
+		//transform-origin: center;
+		//transform: rotate(270deg) translateY(-100vw);
+		//height: 100vw;
+		//width: 100vh;
+		g path {
+			animation-duration: 1s !important;
+		}
+	}
+}
+
+
+
+svg {
+	//grid-area: 1/-1;
+	//grid-row-start: 1;
+	//grid-column-start: 1;
+	z-index: 1;
+	min-height: 100vh;
+	min-width: 100vw;
+
+	top: 50%;
+	left: 50%;
+	//transform-origin: center;
+	stroke: white !important;
+	object-fit: contain;
+	//height: 100vh;
+	//width: 100vw;
+
+	.hasfill {
+		//fill: white !important;
+		stroke-width: 24px;
+	}
+
+	g path {
+		stroke-dasharray: 1150;
+		stroke-dashoffset: 1150;
+	}
+}
+
+@keyframes dash1 {
+  to {
+    stroke-dashoffset: 2300;
+	stroke-dasharray: 1150;
   }
-
-  ul.links {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: calc(3*13ch);
-
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: bold;
-    font-size: 2em;
-
-    li {
-      padding: 1ch;
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.4);
-        cursor: pointer;
-      }
-    }
+}
+@keyframes dash0 {
+  to {
+    stroke-dashoffset: 0;
+	stroke-dasharray: 1150;
   }
+}
+
+$start: 0;
+$end: 209;
+
+@for $i from $start + 1 through $end {
+	g[class="Group $i"] path {
+		animation: dash+mod($i,2) 1.5s ease-in-out forwards;
+		animation-delay: random(2.5)+s;
+	}
 }

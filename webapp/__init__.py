@@ -1,6 +1,9 @@
+import random
 import os
 from os import walk
 from scss.compiler import Compiler
+from scss.namespace import Namespace
+from scss.types import Number
 from flask import Flask
 import json
 
@@ -22,6 +25,19 @@ scss_paths = [
 	"webapp/" + app.scss_path,
 	"webapp/" + app.scss_path + "partials"
 ]
-app.scss_compiler = Compiler(search_path=scss_paths)
+
+
+def rand(x):
+	return Number(random.random()*int(x))
+
+
+def mod(x, y):
+	return Number(x % y)
+
+
+namespace = Namespace()
+namespace.set_function('random', 1, rand)
+namespace.set_function('mod', 2, mod)
+app.scss_compiler = Compiler(namespace=namespace, search_path=scss_paths)
 
 from webapp.routes import main_routes, support_routes

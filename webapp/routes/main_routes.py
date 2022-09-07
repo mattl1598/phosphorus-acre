@@ -10,3 +10,12 @@ def landing():
 @app.route("/projects")
 def projects():
 	return render_template("projects.html")
+
+
+@app.route("/cv")
+def cv():
+	return render_template("cv.html")
+
+@app.route("/test")
+def test():
+	return render_template("test.html")

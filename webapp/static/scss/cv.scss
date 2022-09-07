@@ -1,0 +1,28 @@
+body {
+	background-color: black;
+	max-width: 100vw;
+	height: 100vh;
+	overflow-x: hidden;
+	margin: 0;
+
+	font-family: "Bebas Neue", sans-serif;
+	text-align: center;
+}
+
+h1 {
+	color: white;
+	font-size: 5em;
+	margin: 1ch;
+}
+
+div.background {
+	background-color: #00af8d;
+	height: 100%;
+}
+
+div.foreground {
+	margin: 0 20%;
+	width: 60%;
+	height: 100%;
+	background-color: #bbbbbb;
+}
