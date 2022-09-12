@@ -31,21 +31,21 @@ def static_loader():
 	args = request.args
 	filetype = args["t"]
 	if filetype == "js":
-		try:
-			# check the static content cache for the requested combination
-			output_blob = app.static_content_cache[filetype][args["q"]]
-		except KeyError:
-			file_list = args["q"].split(" ")
-			output = []
-			for file in file_list:
-				if file != '':
-					# load and concatenate all of the requested files
-					with open(
-							str(app.root + "/webapp/static/" + filetype + "/" + file).replace("\\", "/"),
-							"r") as contents:
-						output.append(contents.read())
-			# create http response from concatenated files
-			output_blob = "\n".join(output)
+		# try:
+		# 	# check the static content cache for the requested combination
+		# 	# output_blob = app.static_content_cache[filetype][args["q"]]
+		# except KeyError:
+		file_list = args["q"].split(" ")
+		output = []
+		for file in file_list:
+			if file != '':
+				# load and concatenate all of the requested files
+				with open(
+						str(app.root + "/webapp/static/" + filetype + "/" + file).replace("\\", "/"),
+						"r") as contents:
+					output.append(contents.read())
+		# create http response from concatenated files
+		output_blob = "\n".join(output)
 
 		response = make_response(output_blob)
 		# set correct mimetype for response
